@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import type { Product } from "@/lib/products-data"
-import { categorySubcategories } from "@/lib/products-data"
+import { useState } from "react";
+import type { Product } from "@/lib/products-data";
+import { categorySubcategories } from "@/lib/products-data";
 
 interface ProductCardProps {
-  product: Product
-  onProductClick: (product: Product) => void
+  product: Product;
+  onProductClick: (product: Product) => void;
 }
 
 export function ProductCard({ product, onProductClick }: ProductCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   const getSubcategoryName = () => {
-    const subs = categorySubcategories[product.category]
-    const sub = subs?.find((s) => s.id === product.subcategory)
-    return sub?.name || product.subcategory
-  }
+    const subs = categorySubcategories[product.category];
+    const sub = subs?.find((s) => s.id === product.subcategory);
+    return sub?.name || product.subcategory;
+  };
 
   return (
     <div
@@ -51,22 +51,20 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
           </span>
         </div>
 
-        {/* Subcategory Badge */}
-        {/* <div className="absolute top-4 left-4">
-          <span className="px-3 py-1.5 bg-background/90 text-foreground text-xs tracking-[0.1em] uppercase">
-            {getSubcategoryName()}
-          </span>
-        </div> */}
+        
       </div>
 
       {/* Product Info */}
+      
       <div className="text-center">
-        <h3 className="text-lg md:text-xl font-light text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-xl md:text-2xl font-light text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
           {product.name}
         </h3>
-        {/* <p className="text-sm text-muted-foreground capitalize tracking-wide">{getSubcategoryName()}</p> */}
-        <p className="text-sm text-muted-foreground capitalize tracking-wide">{product.fabric}</p>
+
+        <p className="text-base text-muted-foreground capitalize tracking-wide">
+          {product.fabric}
+        </p>
       </div>
     </div>
-  )
+  );
 }

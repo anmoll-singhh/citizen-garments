@@ -37,7 +37,7 @@ export function LocationSection() {
             Our Office
           </h2>
           <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Experience our collection in person. Visit our exclusive boutique for a personalized shopping experience.
+            Experience our collection in person. Visit our exclusive office for a personalized shopping experience.
           </p>
         </div>
 
