@@ -1,3 +1,4 @@
+
 import type React from "react";
 import type { Metadata } from "next";
 import { Cormorant_Garamond } from "next/font/google";
@@ -14,7 +15,7 @@ const cormorant = Cormorant_Garamond({
 
 /* ✅ FULL SEO OPTIMIZED METADATA */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://citizengarments.com"), // ✅ replace if domain changes
+  metadataBase: new URL("https://citizengarments.com"),
 
   title: {
     default: "Citizen Garments | Luxury Intimate Apparel",
@@ -78,15 +79,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
 
-    /* ✅ OG Image Add Later */
-    // images: [
-    //   {
-    //     url: "/og-image.jpg",
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Citizen Garments Luxury Lingerie",
-    //   },
-    // ],
+    /** ✅ OG IMAGE (PNG Supported) */
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Citizen Garments Luxury Lingerie",
+      },
+    ],
   },
 
   twitter: {
@@ -95,8 +96,8 @@ export const metadata: Metadata = {
     description:
       "Shop premium lingerie, bras, panties, slips and sets from Citizen Garments.",
 
-    /* ✅ Add Later */
-    // images: ["/og-image.jpg"],
+    /** ✅ Twitter Preview Image */
+    images: ["/og-image.png"],
   },
 
   alternates: {

@@ -68,13 +68,13 @@ export const products: Product[] = [
   // ✅ BRA (FEEDING)
   // =========================
   {
-    id: "bra-feeding-saachi",
-    name: "Saachi",
+    id: "bra-feeding-shalini",
+    name: "Shalini (C)",
     category: "bra",
     subcategory: "feeding",
-    image: "/saachi-feeding.png",
+    image: "/shalini-feeding.png",
     fabric: "Hosiery",
-    cupSize: "B",
+    cupSize: "C",
     sizeRange: "30-44 (Size range may vary from product to product and is subject to availability)",
     variety: 6,
   },
