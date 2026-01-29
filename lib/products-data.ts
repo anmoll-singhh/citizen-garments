@@ -172,13 +172,12 @@ export const products: Product[] = [
     sizeRange: "30-44 (Size range may vary from product to product and is subject to availability)",
     variety: 9,
   },
-  //same photo as divya
   {
     id: "bra-everyday-nancy",
     name: "Nancy",
     category: "bra",
     subcategory: "everyday",
-    image: "/divya-everyday.png",
+    image: "/nancy-everyday.jpeg",
     fabric: "Hosiery",
     cupSize: "B",
     sizeRange: "30-44 (Size range may vary from product to product and is subject to availability)",
