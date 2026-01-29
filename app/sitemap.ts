@@ -3,11 +3,11 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://citizengarments.com",
+      url: "https://citizenslingerie.com",
       lastModified: new Date(),
     },
     {
-      url: "https://citizengarments.com/products",
+      url: "https://citizenslingerie.com/products",
       lastModified: new Date(),
     },
   ];

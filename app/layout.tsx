@@ -15,20 +15,20 @@ const cormorant = Cormorant_Garamond({
 
 /* ✅ FULL SEO OPTIMIZED METADATA */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://citizengarments.com"),
+  metadataBase: new URL("https://citizenslingerie.com"),
 
   title: {
-    default: "Citizen Garments | Luxury Intimate Apparel",
-    template: "%s | Citizen Garments",
+    default: "Citizen Lingerie | Luxury Intimate Apparel",
+    template: "%s | Citizen Lingerie",
   },
 
   description:
-    "Citizen Garments is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets crafted with comfort, sophistication and modern elegance.",
+    "Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets crafted with comfort, sophistication and modern elegance.",
 
-  applicationName: "Citizen Garments",
+  applicationName: "Citizen Lingerie",
 
   keywords: [
-    "Citizen Garments",
+    "Citizen Lingerie",
     "luxury lingerie India",
     "lingerie shop online",
     "bras for women",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     "buy lingerie online India",
   ],
 
-  authors: [{ name: "Citizen Garments" }],
-  creator: "Citizen Garments",
-  publisher: "Citizen Garments",
+  authors: [{ name: "Citizen Lingerie" }],
+  creator: "Citizen Lingerie",
+  publisher: "Citizen Lingerie",
 
   formatDetection: {
     telephone: false,
@@ -71,37 +71,37 @@ export const metadata: Metadata = {
   category: "Fashion & Ecommerce",
 
   openGraph: {
-    title: "Citizen Garments | Luxury Intimate Apparel",
+    title: "Citizen Lingerie | Luxury Intimate Apparel",
     description:
-      "Discover luxury lingerie crafted with premium fabrics. Shop bras, panties, slips and curated sets from Citizen Garments.",
-    siteName: "Citizen Garments",
-    url: "https://citizengarments.com",
+      "Discover luxury lingerie crafted with premium fabrics. Shop bras, panties, slips and curated sets from Citizen Lingerie.",
+    siteName: "Citizen Lingerie",
+    url: "https://citizenslingerie.com",
     type: "website",
     locale: "en_IN",
 
     /** ✅ OG IMAGE (PNG Supported) */
     images: [
       {
-        url: "https://citizengarments.com/og-image.png",
+        url: "https://citizenslingerie.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Citizen Garments Luxury Lingerie",
+        alt: "Citizen Lingerie Luxury Lingerie",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Citizen Garments",
+    title: "Citizen Lingerie",
     description:
-      "Shop premium lingerie, bras, panties, slips and sets from Citizen Garments.",
+      "Shop premium lingerie, bras, panties, slips and sets from Citizen Lingerie.",
 
     /** ✅ Twitter Preview Image */
-    images: ["https://citizengarments.com/og-image.png"],
+    images: ["https://citizenslingerie.com/og-image.png"],
   },
 
   alternates: {
-    canonical: "https://citizengarments.com",
+    canonical: "https://citizenslingerie.com",
   },
 };
 
@@ -121,10 +121,10 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                name: "Citizen Garments",
-                url: "https://citizengarments.com",
+                name: "Citizen Lingerie",
+                url: "https://citizenslingerie.com",
                 description:
-                  "Citizen Garments is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets.",
+                  "Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets.",
                 contactPoint: {
                   "@type": "ContactPoint",
                   telephone: "+91-9860266177",

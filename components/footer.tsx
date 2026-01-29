@@ -113,7 +113,7 @@ export function Footer() {
         {/* ✅ Bottom */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Citizen Garments. All rights reserved.
+            © {new Date().getFullYear()} Citizen Lingerie. All rights reserved.
           </p>
 
           <p className="text-sm text-muted-foreground">

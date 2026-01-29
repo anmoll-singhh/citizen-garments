@@ -57,7 +57,7 @@ export function LocationSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Citizen Garments"
+                title="Citizen Lingerie"
                 className="md:grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
