@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   publisher: "Citizen Garments",
 
   formatDetection: {
-    telephone: true,
+    telephone: false,
     email: false,
     address: false,
   },
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     /** ✅ OG IMAGE (PNG Supported) */
     images: [
       {
-        url: "/og-image.png",
+        url: "https://citizengarments.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Citizen Garments Luxury Lingerie",
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
       "Shop premium lingerie, bras, panties, slips and sets from Citizen Garments.",
 
     /** ✅ Twitter Preview Image */
-    images: ["/og-image.png"],
+    images: ["https://citizengarments.com/og-image.png"],
   },
 
   alternates: {

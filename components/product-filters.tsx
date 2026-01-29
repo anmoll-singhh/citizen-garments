@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -39,8 +38,7 @@ export function ProductFilters({
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   /* ✅ Expand category */
@@ -78,7 +76,7 @@ export function ProductFilters({
     if (selectedSubcategories.includes(fullId)) {
       // Remove it
       setSelectedSubcategories(
-        selectedSubcategories.filter((s) => s !== fullId)
+        selectedSubcategories.filter((s) => s !== fullId),
       );
 
       /** ✅ Clear priority if removed */
@@ -140,7 +138,7 @@ export function ProductFilters({
                     "w-full px-4 py-5 border text-sm md:text-base tracking-[0.1em] uppercase transition-all duration-300 flex items-center justify-between",
                     isSelected || isExpanded
                       ? "border-primary bg-primary/5 text-foreground"
-                      : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground",
                   )}
                 >
                   <span className="font-bold">{category.name}</span>
@@ -148,7 +146,7 @@ export function ProductFilters({
                   <ChevronRight
                     className={cn(
                       "w-4 h-4 transition-transform duration-300",
-                      isExpanded && "rotate-90"
+                      isExpanded && "rotate-90",
                     )}
                   />
                 </button>
@@ -164,7 +162,7 @@ export function ProductFilters({
                           "w-full text-left px-4 py-4 font-semibold border-b border-border",
                           isSelected && selectedSubs.length === 0
                             ? "bg-primary/15 text-foreground"
-                            : "text-muted-foreground hover:bg-muted"
+                            : "text-muted-foreground hover:bg-muted",
                         )}
                       >
                         All {category.name}
@@ -184,7 +182,7 @@ export function ProductFilters({
                               "w-full text-left px-4 py-4 flex items-center justify-between",
                               isSubSelected
                                 ? "bg-primary/10 text-foreground"
-                                : "text-muted-foreground hover:bg-muted"
+                                : "text-muted-foreground hover:bg-muted",
                             )}
                           >
                             {sub.name}
@@ -208,6 +206,27 @@ export function ProductFilters({
       {hasFilters && (
         <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-border">
           <span className="text-lg text-muted-foreground mr-2">Active:</span>
+
+          {/* Show selected categories (without subcategories) */}
+          {selectedCategories.map((catId) => {
+            const selectedSubs = getSubcategoriesForCategory(catId);
+            // Only show category if no subcategories are selected
+            if (selectedSubs.length === 0) {
+              const categoryName = categories.find((c) => c.id === catId)?.name;
+              return (
+                <span
+                  key={catId}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 text-sm"
+                >
+                  All {categoryName}
+                  <button onClick={() => showAllInCategory(catId)}>
+                    <X className="w-4 h-4" />
+                  </button>
+                </span>
+              );
+            }
+            return null;
+          })}
 
           {selectedSubcategories.map((fullId) => (
             <span
