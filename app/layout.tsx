@@ -79,10 +79,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
 
-    /** ✅ OG IMAGE (JPG Supported) */
+    /** ✅ OG IMAGE (PNG Supported) */
     images: [
       {
-        url: "https://citizenslingerie.com/og-image.jpg",
+        url: "https://citizenslingerie.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Citizen Lingerie Luxury Lingerie",
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
       "Shop premium lingerie, bras, panties, slips and sets from Citizen Lingerie.",
 
     /** ✅ Twitter Preview Image */
-    images: ["https://citizenslingerie.com/og-image.jpg"],
+    images: ["https://citizenslingerie.com/og-image.png"],
   },
 
   alternates: {
