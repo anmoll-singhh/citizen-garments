@@ -53,6 +53,88 @@ const categories = [
   },
 ];
 
+// function CategoryCard({
+//   category,
+//   index,
+//   isVisible,
+// }: {
+//   category: (typeof categories)[0];
+//   index: number;
+//   isVisible: boolean;
+// }) {
+//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrentImageIndex(
+//         (prev) => (prev + 1) % category.images.length,
+//       );
+//     }, 5000 + index * 500);
+
+//     return () => clearInterval(interval);
+//   }, [category.images.length, index]);
+
+//   return (
+//     <Link
+//       href={category.href}
+//       className={`group block transition-all duration-700 ${
+//         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+//       }`}
+//       style={{ transitionDelay: `${index * 100}ms` }}
+//     >
+//       {/* IMAGE */}
+//       <div className="relative aspect-[9/14] sm:aspect-[3/4] overflow-hidden bg-muted">
+//         {/* Luxury shimmer placeholder */}
+//         <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/80 to-muted animate-pulse" />
+
+//         {category.images.map((image, imgIndex) => (
+//           <Image
+//             key={image}
+//             src={image}
+//             alt={`${category.name} ${imgIndex + 1}`}
+//             fill
+//             sizes="(max-width: 768px) 100vw, 25vw"
+//             priority={index === 0}
+//             placeholder="blur"
+//             blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2QxZDFkMSIvPjwvc3ZnPg=="
+//             className={`absolute inset-0 object-cover transition-all duration-1000 ease-in-out ${
+//               imgIndex === currentImageIndex
+//                 ? "opacity-100 scale-100"
+//                 : "opacity-0 scale-105"
+//             } group-hover:scale-110`}
+//           />
+//         ))}
+
+//         {/* Overlay */}
+//         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-500" />
+
+//         {/* Slide indicators */}
+//         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+//           {category.images.map((_, imgIndex) => (
+//             <span
+//               key={imgIndex}
+//               className={`h-1.5 rounded-full transition-all duration-300 ${
+//                 imgIndex === currentImageIndex
+//                   ? "bg-white w-4"
+//                   : "bg-white/50 w-1.5"
+//               }`}
+//             />
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* TEXT */}
+//       <div className="mt-8 text-center">
+//         <h3 className="text-2xl font-light tracking-wide text-foreground mb-2 group-hover:text-primary transition-colors">
+//           {category.name}
+//         </h3>
+//         <p className="text-base text-muted-foreground leading-relaxed opacity-80">
+//           {category.description}
+//         </p>
+//       </div>
+//     </Link>
+//   );
+// }
 function CategoryCard({
   category,
   index,
@@ -64,7 +146,14 @@ function CategoryCard({
 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // ✅ Track when ALL 4 images are loaded
+  const [loadedCount, setLoadedCount] = useState(0);
+  const allLoaded = loadedCount === category.images.length;
+
+  // ✅ Slider starts ONLY after all images loaded
   useEffect(() => {
+    if (!allLoaded) return;
+
     const interval = setInterval(() => {
       setCurrentImageIndex(
         (prev) => (prev + 1) % category.images.length,
@@ -72,7 +161,7 @@ function CategoryCard({
     }, 5000 + index * 500);
 
     return () => clearInterval(interval);
-  }, [category.images.length, index]);
+  }, [allLoaded, category.images.length, index]);
 
   return (
     <Link
@@ -82,11 +171,27 @@ function CategoryCard({
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* IMAGE */}
-      <div className="relative aspect-[9/14] sm:aspect-[3/4] overflow-hidden bg-muted">
-        {/* Luxury shimmer placeholder */}
-        <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/80 to-muted animate-pulse" />
+      {/* ✅ IMAGE */}
+      <div className="relative aspect-[9/14] sm:aspect-[3/4] overflow-hidden bg-muted rounded-xl">
 
+        {/* ✅ Placeholder + Shimmer until ALL images loaded */}
+        {!allLoaded && (
+          <div className="absolute inset-0 z-20">
+            {/* Light Placeholder */}
+            <Image
+              src="/placeholder-light.webp"
+              alt="Loading..."
+              fill
+              className="object-cover"
+              priority
+            />
+
+            {/* Luxury Shimmer Overlay */}
+            <div className="absolute inset-0 shimmer-effect" />
+          </div>
+        )}
+
+        {/* ✅ Preload ALL images (hidden until loaded) */}
         {category.images.map((image, imgIndex) => (
           <Image
             key={image}
@@ -96,34 +201,39 @@ function CategoryCard({
             sizes="(max-width: 768px) 100vw, 25vw"
             priority={index === 0}
             placeholder="blur"
-            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2QxZDFkMSIvPjwvc3ZnPg=="
+            blurDataURL="/placeholder-light.webp"
+            onLoadingComplete={() =>
+              setLoadedCount((prev) => prev + 1)
+            }
             className={`absolute inset-0 object-cover transition-all duration-1000 ease-in-out ${
-              imgIndex === currentImageIndex
+              allLoaded && imgIndex === currentImageIndex
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-105"
             } group-hover:scale-110`}
           />
         ))}
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-500" />
+        {/* ✅ Overlay */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-500" />
 
-        {/* Slide indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {category.images.map((_, imgIndex) => (
-            <span
-              key={imgIndex}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                imgIndex === currentImageIndex
-                  ? "bg-white w-4"
-                  : "bg-white/50 w-1.5"
-              }`}
-            />
-          ))}
-        </div>
+        {/* ✅ Slide indicators only after loaded */}
+        {allLoaded && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            {category.images.map((_, imgIndex) => (
+              <span
+                key={imgIndex}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  imgIndex === currentImageIndex
+                    ? "bg-white w-4"
+                    : "bg-white/50 w-1.5"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* TEXT */}
+      {/* ✅ TEXT */}
       <div className="mt-8 text-center">
         <h3 className="text-2xl font-light tracking-wide text-foreground mb-2 group-hover:text-primary transition-colors">
           {category.name}
@@ -135,6 +245,7 @@ function CategoryCard({
     </Link>
   );
 }
+
 
 export function CategoryPreview() {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);

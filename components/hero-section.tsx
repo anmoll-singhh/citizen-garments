@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -55,7 +54,7 @@ export function HeroSection() {
     if (isMobile) return;
     const interval = setInterval(
       () => setImgIndex((i) => (i + 1) % DESKTOP_IMAGES.length),
-      IMAGE_DURATION
+      IMAGE_DURATION,
     );
     return () => clearInterval(interval);
   }, [isMobile]);
@@ -96,7 +95,7 @@ export function HeroSection() {
           setVidIndex(nextIndex);
         }, FADE_DURATION);
       },
-      { once: true }
+      { once: true },
     );
   };
 
@@ -105,7 +104,6 @@ export function HeroSection() {
   return (
     <section className="relative bg-black overflow-hidden pt-16 md:pt-20">
       <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)]">
-
         {/* DESKTOP IMAGE SLIDER */}
         {!isMobile && (
           <div className="absolute inset-0">
@@ -142,7 +140,7 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-black/35" />
           </div>
         )}
-
+       
         {/* MOBILE VIDEOS */}
         {isMobile && (
           <>

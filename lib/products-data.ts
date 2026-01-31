@@ -1008,18 +1008,7 @@ export const products: Product[] = [
     elasticType: "Semi inner elastic",
     colors: 6,
   },
-  //cant find info
-  // {
-  //   id: "panty-small-derby",
-  //   name: "Derby",
-  //   category: "panties",
-  //   subcategory: "smallElastic",
-  //   image: "/placeholder.svg",
-  //   fabric: "cotton plain",
-  //   type: "Small Elastic Panty",
-  //   elasticType: "small elastic",
-  //   colors: ["white", "black"],
-  // },
+ 
   {
     id: "panty-small-soha",
     name: "Soha",

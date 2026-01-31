@@ -1,8 +1,10 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+
 import type { Product } from "@/lib/products-data";
 import { categorySubcategories } from "@/lib/products-data";
 
@@ -13,6 +15,21 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onProductClick }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  // ✅ Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // ✅ Theme Placeholder
+  const placeholder =
+    mounted && resolvedTheme === "dark"
+      ? "/placeholder-light.webp"
+      : "/placeholder-light.webp";
 
   const getSubcategoryName = () => {
     const subs = categorySubcategories[product.category];
@@ -29,16 +46,34 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
     >
       {/* ✅ Optimized Image Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-muted mb-5">
-        
-        {/* ✅ Next.js Image Optimization */}
+
+        {/* ✅ Placeholder + Shimmer (only until loaded) */}
+        {!loaded && (
+          <div className="absolute inset-0">
+            <Image
+              src={placeholder}
+              alt="Loading..."
+              fill
+              className="object-cover"
+            />
+
+            {/* ✅ Moving Premium Shimmer */}
+            <div className="absolute inset-0 shimmer-effect" />
+          </div>
+        )}
+
+        {/* ✅ Product Image */}
         <Image
-          src={product.image || "/placeholder.svg"}
+          src={product.image || placeholder}
           alt={product.name}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
           quality={80}
           loading="lazy"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className={`object-cover transition-transform duration-700 group-hover:scale-110 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoadingComplete={() => setLoaded(true)}
         />
 
         {/* Overlay */}
