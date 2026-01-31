@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -25,7 +26,6 @@ const IMAGE_DURATION = 4000;
 
 export function HeroSection() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
   const [vidIndex, setVidIndex] = useState(0);
@@ -33,16 +33,16 @@ export function HeroSection() {
 
   const videoA = useRef<HTMLVideoElement>(null);
   const videoB = useRef<HTMLVideoElement>(null);
+
   const active = useRef<"A" | "B">("A");
 
+  /* LOADER */
   useEffect(() => {
-    const t = setTimeout(() => {
-      setIsLoading(false);
-      setIsVisible(true);
-    }, 300);
+    const t = setTimeout(() => setIsLoading(false), 300);
     return () => clearTimeout(t);
   }, []);
 
+  /* DETECT MOBILE */
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 768);
     update();
@@ -50,24 +50,29 @@ export function HeroSection() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  /* DESKTOP IMAGE SLIDER */
   useEffect(() => {
     if (isMobile) return;
-    const interval = setInterval(
-      () => setImgIndex((i) => (i + 1) % DESKTOP_IMAGES.length),
-      IMAGE_DURATION,
-    );
+    const interval = setInterval(() => {
+      setImgIndex((i) => (i + 1) % DESKTOP_IMAGES.length);
+    }, IMAGE_DURATION);
     return () => clearInterval(interval);
   }, [isMobile]);
 
+  /* ✅ MOBILE VIDEO LOOP FIX */
   const crossfade = async () => {
     if (!isMobile) return;
 
-    const current = active.current === "A" ? videoA.current : videoB.current;
-    const next = active.current === "A" ? videoB.current : videoA.current;
+    const current =
+      active.current === "A" ? videoA.current : videoB.current;
+    const next =
+      active.current === "A" ? videoB.current : videoA.current;
+
     if (!current || !next) return;
 
     const nextIndex = (vidIndex + 1) % MOBILE_VIDEOS.length;
 
+    /* load next video */
     next.innerHTML = `
       <source src="${MOBILE_VIDEOS[nextIndex].webm}" type="video/webm" />
       <source src="${MOBILE_VIDEOS[nextIndex].mp4}" type="video/mp4" />
@@ -81,6 +86,7 @@ export function HeroSection() {
       "canplay",
       async () => {
         await next.play();
+
         next.style.transition = `opacity ${FADE_DURATION}ms ease`;
         current.style.transition = `opacity ${FADE_DURATION}ms ease`;
 
@@ -95,7 +101,7 @@ export function HeroSection() {
           setVidIndex(nextIndex);
         }, FADE_DURATION);
       },
-      { once: true },
+      { once: true }
     );
   };
 
@@ -104,6 +110,7 @@ export function HeroSection() {
   return (
     <section className="relative bg-black overflow-hidden pt-16 md:pt-20">
       <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)]">
+
         {/* DESKTOP IMAGE SLIDER */}
         {!isMobile && (
           <div className="absolute inset-0">
@@ -123,7 +130,7 @@ export function HeroSection() {
           </div>
         )}
 
-        {/* MOBILE POSTER PLACEHOLDER */}
+        {/* MOBILE POSTER */}
         {isMobile && (
           <div
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -140,8 +147,8 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-black/35" />
           </div>
         )}
-       
-        {/* MOBILE VIDEOS */}
+
+        {/* ✅ MOBILE VIDEOS (BOTH HAVE onEnded NOW) */}
         {isMobile && (
           <>
             <video
@@ -163,16 +170,11 @@ export function HeroSection() {
               muted
               playsInline
               preload="metadata"
+              onEnded={crossfade} // ✅ FIX HERE
               className="absolute inset-0 w-full h-full object-cover opacity-0"
             />
           </>
         )}
-
-        {/* LUXURY OVERLAY */}
-        <div className="pointer-events-none absolute inset-0 z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)]" />
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('/grain.webp')]" />
-        </div>
 
         {/* CONTENT */}
         <div className="relative z-20 flex items-center justify-center h-full text-center px-4">
