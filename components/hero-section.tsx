@@ -7,25 +7,18 @@ import { ArrowDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { HeroSkeleton } from "./skeletons";
 
-/* ✅ STATIC IMPORTS (BEST IMAGE OPTIMIZATION) */
+/* DESKTOP IMAGES */
 import hero1 from "@/public/hero-img-pc-1.jpeg";
 import hero2 from "@/public/bela-padded.png";
 import hero3 from "@/public/hero-img-pc-3.png";
 import hero4 from "@/public/clovia-everyday.png";
 
-/* ✅ Desktop Image Array */
 const DESKTOP_IMAGES = [hero1, hero2, hero3, hero4];
 
-/* ✅ Mobile Videos (WebM + MP4 fallback files must exist) */
+/* MOBILE VIDEOS */
 const MOBILE_VIDEOS = [
-  {
-    webm: "/hero-vid-m-1.webm",
-    mp4: "/hero-vid-m-1.mp4",
-  },
-  {
-    webm: "/hero-vid-m-4.webm",
-    mp4: "/hero-vid-m-4.mp4",
-  },
+  { webm: "/hero-vid-m-1.webm", mp4: "/hero-vid-m-1.mp4" },
+  { webm: "/hero-vid-m-2.webm", mp4: "/hero-vid-m-2.mp4" },
 ];
 
 const FADE_DURATION = 800;
@@ -35,18 +28,14 @@ export function HeroSection() {
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
-  /* ✅ Desktop Image Index */
   const [imgIndex, setImgIndex] = useState(0);
-
-  /* ✅ Mobile Video Index */
   const [vidIndex, setVidIndex] = useState(0);
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   const videoA = useRef<HTMLVideoElement>(null);
   const videoB = useRef<HTMLVideoElement>(null);
   const active = useRef<"A" | "B">("A");
 
-  /* ✅ Initial Skeleton Loading */
   useEffect(() => {
     const t = setTimeout(() => {
       setIsLoading(false);
@@ -55,38 +44,31 @@ export function HeroSection() {
     return () => clearTimeout(t);
   }, []);
 
-  /* ✅ Detect Mobile */
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 768);
-
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  /* ✅ Desktop Image Slideshow */
   useEffect(() => {
     if (isMobile) return;
-
-    const interval = setInterval(() => {
-      setImgIndex((prev) => (prev + 1) % DESKTOP_IMAGES.length);
-    }, IMAGE_DURATION);
-
+    const interval = setInterval(
+      () => setImgIndex((i) => (i + 1) % DESKTOP_IMAGES.length),
+      IMAGE_DURATION
+    );
     return () => clearInterval(interval);
   }, [isMobile]);
 
-  /* ✅ Mobile Video Crossfade */
   const crossfade = async () => {
     if (!isMobile) return;
 
     const current = active.current === "A" ? videoA.current : videoB.current;
     const next = active.current === "A" ? videoB.current : videoA.current;
-
     if (!current || !next) return;
 
     const nextIndex = (vidIndex + 1) % MOBILE_VIDEOS.length;
 
-    /* ✅ Load next video sources */
     next.innerHTML = `
       <source src="${MOBILE_VIDEOS[nextIndex].webm}" type="video/webm" />
       <source src="${MOBILE_VIDEOS[nextIndex].mp4}" type="video/mp4" />
@@ -96,10 +78,10 @@ export function HeroSection() {
     next.currentTime = 0;
     next.style.opacity = "0";
 
-    const startNext = async () => {
-      try {
+    next.addEventListener(
+      "canplay",
+      async () => {
         await next.play();
-
         next.style.transition = `opacity ${FADE_DURATION}ms ease`;
         current.style.transition = `opacity ${FADE_DURATION}ms ease`;
 
@@ -113,10 +95,9 @@ export function HeroSection() {
           active.current = active.current === "A" ? "B" : "A";
           setVidIndex(nextIndex);
         }, FADE_DURATION);
-      } catch {}
-    };
-
-    next.addEventListener("canplay", startNext, { once: true });
+      },
+      { once: true }
+    );
   };
 
   if (isLoading) return <HeroSkeleton />;
@@ -124,19 +105,19 @@ export function HeroSection() {
   return (
     <section className="relative bg-black overflow-hidden pt-16 md:pt-20">
       <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)]">
-        {/* ✅ DESKTOP IMAGE SLIDER */}
+
+        {/* DESKTOP IMAGE SLIDER */}
         {!isMobile && (
           <div className="absolute inset-0">
             {DESKTOP_IMAGES.map((img, i) => (
               <Image
                 key={i}
                 src={img}
-                alt="Hero Background"
+                alt="Hero"
                 fill
-                quality={85}
                 priority={i === 0}
                 placeholder="blur"
-                className={`absolute inset-0 object-cover transition-opacity duration-[800ms] ${
+                className={`absolute inset-0 object-cover transition-opacity duration-700 ${
                   i === imgIndex ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -144,48 +125,61 @@ export function HeroSection() {
           </div>
         )}
 
-        {/* ✅ MOBILE VIDEO SLIDER (WebM Optimized) */}
+        {/* MOBILE POSTER PLACEHOLDER */}
+        {isMobile && (
+          <div
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              isVideoReady ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <Image
+              src="/hero-poster.jpg"
+              alt="Luxury Hero"
+              fill
+              priority
+              className="object-cover scale-105 blur-[2px]"
+            />
+            <div className="absolute inset-0 bg-black/35" />
+          </div>
+        )}
+
+        {/* MOBILE VIDEOS */}
         {isMobile && (
           <>
-            {/* ✅ VIDEO A */}
             <video
               ref={videoA}
               autoPlay
               muted
               playsInline
               preload="metadata"
+              onCanPlay={() => setIsVideoReady(true)}
               onEnded={crossfade}
-              className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-100"
+              className="absolute inset-0 w-full h-full object-cover"
             >
-              <source
-                src={MOBILE_VIDEOS[vidIndex].webm}
-                type="video/webm"
-              />
-              <source
-                src={MOBILE_VIDEOS[vidIndex].mp4}
-                type="video/mp4"
-              />
+              <source src={MOBILE_VIDEOS[vidIndex].webm} type="video/webm" />
+              <source src={MOBILE_VIDEOS[vidIndex].mp4} type="video/mp4" />
             </video>
 
-            {/* ✅ VIDEO B */}
             <video
               ref={videoB}
               muted
               playsInline
               preload="metadata"
-              className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-0"
+              className="absolute inset-0 w-full h-full object-cover opacity-0"
             />
           </>
         )}
 
-        {/* ✅ CONTENT */}
-        <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
+        {/* LUXURY OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 z-10">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)]" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('/grain.png')]" />
+        </div>
+
+        {/* CONTENT */}
+        <div className="relative z-20 flex items-center justify-center h-full text-center px-4">
           <div>
-            <p
-              className={`text-sm tracking-[0.4em] text-white/80 uppercase mb-8 transition-opacity duration-1000 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
+            <p className="text-sm tracking-[0.4em] text-white/80 uppercase mb-8">
               Luxury Intimate Apparel
             </p>
 
@@ -197,19 +191,16 @@ export function HeroSection() {
               Discover our curated collection of exquisite lingerie
             </p>
 
-            <div className="flex justify-center gap-6">
-              <Link
-                href="/products"
-                className="px-10 py-4 bg-white text-black uppercase tracking-[0.2em]"
-              >
-                View Collection
-              </Link>
-            </div>
+            <Link
+              href="/products"
+              className="px-10 py-4 bg-white text-black uppercase tracking-[0.2em]"
+            >
+              View Collection
+            </Link>
           </div>
         </div>
 
-        {/* ✅ SCROLL ICON */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-30">
           <ArrowDown className="w-5 h-5 text-white/70" />
         </div>
       </div>

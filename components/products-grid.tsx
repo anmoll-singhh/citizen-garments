@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
@@ -27,16 +26,16 @@ export function ProductsGrid() {
 
   /* ✅ Filters */
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    initialCategory ? [initialCategory] : []
+    initialCategory ? [initialCategory] : [],
   );
 
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
-    []
+    [],
   );
 
   /* ✅ Priority Subcategory */
   const [prioritySubcategory, setPrioritySubcategory] = useState<string | null>(
-    null
+    null,
   );
 
   /* ✅ Pagination */
@@ -115,12 +114,12 @@ export function ProductsGrid() {
 
       /* ✅ Subcategory match */
       const relevantSubs = selectedSubcategories.filter((s) =>
-        s.startsWith(`${product.category}:`)
+        s.startsWith(`${product.category}:`),
       );
 
       if (relevantSubs.length > 0) {
         return relevantSubs.some(
-          (s) => s === `${product.category}:${product.subcategory}`
+          (s) => s === `${product.category}:${product.subcategory}`,
         );
       }
 
@@ -173,10 +172,7 @@ export function ProductsGrid() {
   /* ✅ Visible Pagination Pages */
   const visiblePages = 5;
 
-  const startPage = Math.max(
-    1,
-    currentPage - Math.floor(visiblePages / 2)
-  );
+  const startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
 
   const endPage = Math.min(totalPages, startPage + visiblePages - 1);
 
@@ -250,7 +246,12 @@ export function ProductsGrid() {
       </div>
 
       {/* ✅ Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"> */}
+      {/* ✅ Grid */}
+      <div
+        id="search-results"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+      >
         {paginatedProducts.map((product, index) => (
           <div
             key={product.id}
@@ -291,7 +292,7 @@ export function ProductsGrid() {
                   "px-4 py-2 border text-sm transition",
                   currentPage === pageNum
                     ? "bg-primary text-white border-primary"
-                    : "border-border hover:bg-muted"
+                    : "border-border hover:bg-muted",
                 )}
               >
                 {pageNum}

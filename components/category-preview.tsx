@@ -1,6 +1,8 @@
+
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { CategorySectionSkeleton } from "./skeletons";
 
@@ -12,7 +14,7 @@ const categories = [
       "/glory-padded.jpeg",
       "/tipsy-padded.png",
       "/clovia-everyday.png",
-      "sinq-padded.png",
+      "/sinq-padded.png",
     ],
     href: "/products?category=bra",
   },
@@ -63,13 +65,11 @@ function CategoryCard({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    // Auto-slide images every 5-7 seconds (randomized per card)
-    const interval = setInterval(
-      () => {
-        setCurrentImageIndex((prev) => (prev + 1) % category.images.length);
-      },
-      5000 + index * 500,
-    ); // Stagger the intervals slightly
+    const interval = setInterval(() => {
+      setCurrentImageIndex(
+        (prev) => (prev + 1) % category.images.length,
+      );
+    }, 5000 + index * 500);
 
     return () => clearInterval(interval);
   }, [category.images.length, index]);
@@ -77,24 +77,35 @@ function CategoryCard({
   return (
     <Link
       href={category.href}
-      className={`group relative overflow-hidden transition-all duration-700 ${
+      className={`group block transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="aspect-[3/4] relative overflow-hidden bg-muted">
+      {/* IMAGE */}
+      <div className="relative aspect-[9/14] sm:aspect-[3/4] overflow-hidden bg-muted">
+        {/* Luxury shimmer placeholder */}
+        <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/80 to-muted animate-pulse" />
+
         {category.images.map((image, imgIndex) => (
-          <img
+          <Image
             key={image}
-            src={image || "/placeholder.svg"}
+            src={image}
             alt={`${category.name} ${imgIndex + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            priority={index === 0}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2QxZDFkMSIvPjwvc3ZnPg=="
+            className={`absolute inset-0 object-cover transition-all duration-1000 ease-in-out ${
               imgIndex === currentImageIndex
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-105"
             } group-hover:scale-110`}
           />
         ))}
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-500" />
 
         {/* Slide indicators */}
@@ -102,18 +113,22 @@ function CategoryCard({
           {category.images.map((_, imgIndex) => (
             <span
               key={imgIndex}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                imgIndex === currentImageIndex ? "bg-white w-4" : "bg-white/50"
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                imgIndex === currentImageIndex
+                  ? "bg-white w-4"
+                  : "bg-white/50 w-1.5"
               }`}
             />
           ))}
         </div>
       </div>
-      <div className="mt-6 text-center">
-        <h3 className="text-xl md:text-2xl font-base text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+
+      {/* TEXT */}
+      <div className="mt-8 text-center">
+        <h3 className="text-2xl font-light tracking-wide text-foreground mb-2 group-hover:text-primary transition-colors">
           {category.name}
         </h3>
-        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <p className="text-base text-muted-foreground leading-relaxed opacity-80">
           {category.description}
         </p>
       </div>
@@ -138,10 +153,12 @@ export function CategoryPreview() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = Number.parseInt(
-              entry.target.getAttribute("data-index") || "0",
+            const index = Number(
+              entry.target.getAttribute("data-index"),
             );
-            setVisibleItems((prev) => [...new Set([...prev, index])]);
+            setVisibleItems((prev) =>
+              prev.includes(index) ? prev : [...prev, index],
+            );
           }
         });
       },
@@ -154,25 +171,23 @@ export function CategoryPreview() {
     return () => observer.disconnect();
   }, [isLoading]);
 
-  if (isLoading) {
-    return <CategorySectionSkeleton />;
-  }
+  if (isLoading) return <CategorySectionSkeleton />;
 
   return (
     <section className="py-24 md:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <p className="text-xs md:text-lg tracking-[0.3em] text-muted-foreground uppercase mb-4">
             Explore
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light text-foreground text-balance">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light text-foreground">
             Our Categories
           </h2>
         </div>
 
         <div
           ref={containerRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4"
         >
           {categories.map((category, index) => (
             <div key={category.name} data-index={index}>
@@ -188,3 +203,4 @@ export function CategoryPreview() {
     </section>
   );
 }
+
