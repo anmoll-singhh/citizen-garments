@@ -31,7 +31,7 @@ export function FeaturedSection() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/elegant-bedroom-interior-soft-lighting-luxury-aest.jpg')`,
+            backgroundImage: `url('/elegant-bedroom-interior-soft-lighting-luxury-aest.webp')`,
           }}
         />
         <div className="absolute inset-0 bg-background/70 dark:bg-background/85" />

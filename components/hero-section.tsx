@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from "react";
 import { HeroSkeleton } from "./skeletons";
 
 /* DESKTOP IMAGES */
-import hero1 from "@/public/hero-img-pc-1.jpeg";
-import hero2 from "@/public/bela-padded.png";
-import hero3 from "@/public/hero-img-pc-3.png";
-import hero4 from "@/public/clovia-everyday.png";
+import hero1 from "@/public/hero-img-pc-1.webp";
+import hero2 from "@/public/bela-padded.webp";
+import hero3 from "@/public/hero-img-pc-3.webp";
+import hero4 from "@/public/clovia-everyday.webp";
 
 const DESKTOP_IMAGES = [hero1, hero2, hero3, hero4];
 
@@ -133,7 +133,7 @@ export function HeroSection() {
             }`}
           >
             <Image
-              src="/hero-poster.jpg"
+              src="/hero-poster.webp"
               alt="Luxury Hero"
               fill
               priority
@@ -173,7 +173,7 @@ export function HeroSection() {
         {/* LUXURY OVERLAY */}
         <div className="pointer-events-none absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)]" />
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('/grain.png')]" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[url('/grain.webp')]" />
         </div>
 
         {/* CONTENT */}
