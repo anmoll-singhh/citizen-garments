@@ -29,7 +29,10 @@ export const metadata: Metadata = {
 
   keywords: [
     "Citizen Lingerie",
+    "Citizens Lingerie",
+    "Citizen Garments",
     "luxury lingerie India",
+    "luxury lingerie Ulhasnagar",
     "lingerie shop online",
     "bras for women",
     "padded bra",
