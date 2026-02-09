@@ -115,6 +115,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets crafted with comfort, sophistication and modern elegance." />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={`${cormorant.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {/* ✅ Business Schema (Google Trust Boost) */}
