@@ -1,4 +1,3 @@
-
 import type React from "react";
 import type { Metadata } from "next";
 import { Cormorant_Garamond } from "next/font/google";
@@ -62,9 +61,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    noimageindex: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
@@ -72,6 +74,8 @@ export const metadata: Metadata = {
   },
 
   category: "Fashion & Ecommerce",
+
+  referrer: "strict-origin-when-cross-origin",
 
   openGraph: {
     title: "Citizen Lingerie | Luxury Intimate Apparel",
@@ -115,12 +119,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets crafted with comfort, sophistication and modern elegance." />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
       <body className={`${cormorant.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {/* ✅ Business Schema (Google Trust Boost) */}
