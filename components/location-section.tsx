@@ -95,7 +95,7 @@ export function LocationSection() {
                 </p>
                 <p className="flex justify-between max-w-sm text-base md:text-lg">
                   <span>Sunday</span>
-                  <span className="text-muted-foreground">10:00 PM - 7:00 PM</span>
+                  <span className="text-muted-foreground">10:00 AM - 7:00 PM</span>
                 </p>
               </div>
             </div>
