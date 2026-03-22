@@ -12,17 +12,16 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-/* ✅ FULL SEO OPTIMIZED METADATA */
 export const metadata: Metadata = {
   metadataBase: new URL("https://citizenslingerie.com"),
 
   title: {
-    default: "Citizen Lingerie | Luxury Intimate Apparel",
+    default: "Citizen Lingerie | Premium Bras, Panties & Lingerie Sets – Ulhasnagar",
     template: "%s | Citizen Lingerie",
   },
 
   description:
-    "Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets crafted with comfort, sophistication and modern elegance.",
+    "Shop Citizen Lingerie — premium bras, panties, lingerie sets, slips & sports bras for women. Comfortable, affordable & stylish innerwear. Based in Ulhasnagar, Maharashtra. Order online or visit us today.",
 
   applicationName: "Citizen Lingerie",
 
@@ -30,32 +29,38 @@ export const metadata: Metadata = {
     "Citizen Lingerie",
     "Citizens Lingerie",
     "Citizen Garments",
-    "luxury lingerie India",
-    "luxury lingerie Ulhasnagar",
-    "lingerie shop online",
-    "bras for women",
-    "padded bra",
-    "cotton bra",
-    "lace bra",
-    "panties for women",
-    "comfortable panties",
-    "ladies slips",
-    "night slips for women",
-    "lingerie sets",
-    "bra panty set",
-    "bridal lingerie sets",
-    "premium innerwear brand",
-    "buy lingerie online India",
+    "citizenslingerie.com",
+    "lingerie shop Ulhasnagar",
+    "bra shop Ulhasnagar",
+    "ladies innerwear Ulhasnagar",
+    "women lingerie online India",
+    "buy bra online India",
+    "padded bra India",
+    "cotton bra women",
+    "sports bra women India",
+    "panties for women India",
+    "boyshort panties",
+    "lingerie sets India",
+    "bra panty set online",
+    "bridal lingerie India",
+    "innerwear brand India",
+    "night slip for women",
+    "affordable lingerie India",
+    "premium lingerie Maharashtra",
+    "luxury innerwear India",
+    "soft cup bra India",
+    "everyday bra women",
+    "feeding bra India",
   ],
 
-  authors: [{ name: "Citizen Lingerie" }],
+  authors: [{ name: "Citizen Lingerie", url: "https://citizenslingerie.com" }],
   creator: "Citizen Lingerie",
   publisher: "Citizen Lingerie",
 
   formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
+    telephone: true,
+    email: true,
+    address: true,
   },
 
   robots: {
@@ -73,42 +78,175 @@ export const metadata: Metadata = {
     },
   },
 
-  category: "Fashion & Ecommerce",
-
+  category: "Fashion & Lingerie",
   referrer: "strict-origin-when-cross-origin",
 
   openGraph: {
-    title: "Citizen Lingerie | Luxury Intimate Apparel",
+    title: "Citizen Lingerie | Premium Bras, Panties & Lingerie Sets",
     description:
-      "Discover luxury lingerie crafted with premium fabrics. Shop bras, panties, slips and curated sets from Citizen Lingerie.",
+      "Shop Citizen Lingerie — premium bras, panties, lingerie sets, slips & sports bras for women. Comfortable, affordable & stylish innerwear. Based in Ulhasnagar, Maharashtra.",
     siteName: "Citizen Lingerie",
     url: "https://citizenslingerie.com",
     type: "website",
     locale: "en_IN",
-
-    /** ✅ OG IMAGE (JPG Supported) */
     images: [
       {
         url: "https://citizenslingerie.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Citizen Lingerie Luxury Lingerie",
+        alt: "Citizen Lingerie – Premium Women's Innerwear India",
+        type: "image/jpeg",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Citizen Lingerie",
+    site: "@citizenslingerie",
+    creator: "@citizenslingerie",
+    title: "Citizen Lingerie | Premium Bras, Panties & Lingerie Sets",
     description:
-      "Shop premium lingerie, bras, panties, slips and sets from Citizen Lingerie.",
-
-    /** ✅ Twitter Preview Image */
+      "Shop premium bras, panties, lingerie sets & slips from Citizen Lingerie. Based in Ulhasnagar, India.",
     images: ["https://citizenslingerie.com/og-image.jpg"],
   },
 
   alternates: {
     canonical: "https://citizenslingerie.com",
+    languages: {
+      "en-IN": "https://citizenslingerie.com",
+    },
+  },
+
+  other: {
+    "theme-color": "#000000",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": "Citizen Lingerie",
+    "mobile-web-app-capable": "yes",
+    HandheldFriendly: "True",
+    MobileOptimized: "320",
+    rating: "general",
+    revisit: "7 days",
+    language: "English",
+    distribution: "global",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://citizenslingerie.com/#organization",
+  name: "Citizen Lingerie",
+  alternateName: ["Citizens Lingerie", "Citizen Garments"],
+  url: "https://citizenslingerie.com",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://citizenslingerie.com/og-image.jpg",
+    width: 1200,
+    height: 630,
+  },
+  description:
+    "Citizen Lingerie is a premium women's innerwear brand offering bras, panties, lingerie sets, slips and sports bras. Based in Ulhasnagar, Maharashtra, India.",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-9860266177",
+      contactType: "customer service",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-9137914629",
+      contactType: "sales",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Bk no. 974, Sukhmani Niwas, Station Road",
+    addressLocality: "Ulhasnagar",
+    addressRegion: "Maharashtra",
+    postalCode: "421003",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://instagram.com/citizenslingerie",
+    "https://wa.me/919137914629",
+  ],
+  email: "citizenslingerie@gmail.com",
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "@id": "https://citizenslingerie.com/#localbusiness",
+  name: "Citizen Lingerie",
+  alternateName: "Citizen Garments",
+  description:
+    "Premium women's innerwear store in Ulhasnagar offering bras, panties, lingerie sets, slips and sports bras. Visit us in person or shop online.",
+  url: "https://citizenslingerie.com",
+  telephone: "+91-9860266177",
+  email: "citizenslingerie@gmail.com",
+  image: "https://citizenslingerie.com/og-image.jpg",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Bk no. 974, Sukhmani Niwas, Station Road",
+    addressLocality: "Ulhasnagar",
+    addressRegion: "Maharashtra",
+    postalCode: "421003",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 19.220028,
+    longitude: 73.162244,
+  },
+  hasMap: "https://maps.app.goo.gl/16jqSC2VrFCWtFBW7",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday", "Sunday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+  ],
+  priceRange: "₹₹",
+  currenciesAccepted: "INR",
+  paymentAccepted: "Cash, UPI, Credit Card, Debit Card",
+  areaServed: ["Ulhasnagar", "Thane", "Mumbai", "Maharashtra", "India"],
+  parentOrganization: {
+    "@id": "https://citizenslingerie.com/#organization",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://citizenslingerie.com/#website",
+  name: "Citizen Lingerie",
+  url: "https://citizenslingerie.com",
+  description:
+    "Shop premium bras, panties, lingerie sets and slips from Citizen Lingerie. Based in Ulhasnagar, India.",
+  inLanguage: "en-IN",
+  publisher: {
+    "@id": "https://citizenslingerie.com/#organization",
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate:
+        "https://citizenslingerie.com/products?search={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
@@ -118,42 +256,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="geo.region" content="IN-MH" />
+        <meta name="geo.placename" content="Ulhasnagar, Maharashtra, India" />
+        <meta name="geo.position" content="19.220028;73.162244" />
+        <meta name="ICBM" content="19.220028, 73.162244" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className={`${cormorant.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {/* ✅ Business Schema (Google Trust Boost) */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "Citizen Lingerie",
-                url: "https://citizenslingerie.com",
-                description:
-                  "Citizen Lingerie is a luxury intimate apparel brand offering premium lingerie, bras, panties, slips and curated sets.",
-                contactPoint: {
-                  "@type": "ContactPoint",
-                  telephone: "+91-9860266177",
-                  contactType: "customer service",
-                  areaServed: "IN",
-                  availableLanguage: ["English", "Hindi"],
-                },
-                sameAs: [
-                  "https://instagram.com/citizenslingerie",
-                  "https://wa.me/919137914629",
-                ],
-              }),
-            }}
-          />
-
-          {/* ✅ App Content */}
           <Suspense fallback={<div />}>
             <SearchProvider>{children}</SearchProvider>
           </Suspense>
         </ThemeProvider>
-
-        {/* ✅ Analytics */}
         <Analytics />
       </body>
     </html>
