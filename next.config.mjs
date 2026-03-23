@@ -45,17 +45,6 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      // Redirect www to non-www
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.citizenslingerie.com" }],
-        destination: "https://citizenslingerie.com/:path*",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
