@@ -119,9 +119,8 @@ export const metadata: Metadata = {
 
   // ✅ verification tag moved here — proper Next.js way, no raw <meta> tag needed
   verification: {
-    google: "CoMJbPpynfe0pLoHt3C62jfLZc4w3Yj9xnS31of3TJg",
+    google: "-RjTAJa0UFi7UA9S8pBu_TmR_SRGK0nBT-r7FTMbIR8",
   },
-
   other: {
     "theme-color": "#000000",
     "apple-mobile-web-app-capable": "yes",
