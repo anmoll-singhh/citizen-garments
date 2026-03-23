@@ -117,6 +117,11 @@ export const metadata: Metadata = {
     },
   },
 
+  // ✅ verification tag moved here — proper Next.js way, no raw <meta> tag needed
+  verification: {
+    google: "CoMJbPpynfe0pLoHt3C62jfLZc4w3Yj9xnS31of3TJg",
+  },
+
   other: {
     "theme-color": "#000000",
     "apple-mobile-web-app-capable": "yes",
@@ -139,11 +144,12 @@ const organizationSchema = {
   name: "Citizen Lingerie",
   alternateName: ["Citizens Lingerie", "Citizen Garments"],
   url: "https://citizenslingerie.com",
+  // ✅ Fixed: logo now points to actual square-ish brand logo, not og-image
   logo: {
     "@type": "ImageObject",
-    url: "https://citizenslingerie.com/og-image.jpg",
-    width: 1200,
-    height: 630,
+    url: "https://citizenslingerie.com/logos/Citizens.png",
+    width: 660,
+    height: 378,
   },
   description:
     "Citizen Lingerie is a premium women's innerwear brand offering bras, panties, lingerie sets, slips and sports bras. Based in Ulhasnagar, Maharashtra, India.",
@@ -260,10 +266,12 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* ✅ Geo tags — kept here as Next.js metadata doesn't support these natively */}
         <meta name="geo.region" content="IN-MH" />
         <meta name="geo.placename" content="Ulhasnagar, Maharashtra, India" />
         <meta name="geo.position" content="19.220028;73.162244" />
         <meta name="ICBM" content="19.220028, 73.162244" />
+        {/* ✅ Removed raw google-site-verification meta tag — now handled via metadata.verification above */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
