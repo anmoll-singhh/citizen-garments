@@ -1,0 +1,45 @@
+# Citizen Lingerie
+
+Citizen Lingerie is a premium women's innerwear brand based in Ulhasnagar, Maharashtra, India. They specialize in high-quality, comfortable, and elegant bras, panties, matching lingerie sets, night slips, and sports bras.
+
+## Store Location & Contact Information
+- **Phone**: +91-9860266177 (Customer Service) / +91-9137914629 (Sales / Orders)
+- **Email**: citizenslingerie@gmail.com
+- **Store Address**: Bk no. 974, Sukhmani Niwas, Station Road, Ulhasnagar, Maharashtra, 421003, India
+- **Coordinates**: Latitude: 19.220028, Longitude: 73.162244
+- **Instagram**: [citizenslingerie](https://instagram.com/citizenslingerie)
+- **WhatsApp**: [Chat Link](https://wa.me/919137914629)
+
+## Website Structure & Core Routes
+- **Home Page** (`/`): Hero showcase, category selectors, featured products grid, local shop map, and contact details.
+- **Product Collection** (`/products`): Full catalog of items with dynamic search, filters by category/subcategory, and pagination.
+- **Dynamic Product Sharing**: Individual products can be directly viewed and linked using `?product=product-id` query parameters (e.g., `/products?product=bra-feeding-shalini`).
+
+## Product Catalog & Categories
+
+### 1. Bras (Categories & Subcategories)
+- **Everyday Bras**: Comfortable daily wear hosiery and cotton lycra bras (e.g., *Nike*, *Nicky*, *Sherry*, *Clovia*, *Vista*, *Divya*, *Nancy*, *Hazel*, *Spykar*, *Nidhi*, *Altis*, *Neha*, *Unique*, *Sting*, *Lovable*, *Sonali*, *Twist*).
+- **100% Cotton Bras**: High breathability, premium cotton bras (e.g., *Swift*, *Kirti*, *Wonder*, *Extreme*, *Roshni*, *Sakshi*).
+- **Padded Bras**: Sleek shaped padded designs (e.g., *Glory*, *Bela*, *Tipsy*, *Sinq*, *Pushup*, *Chik Pad*, *Nivea*).
+- **Soft Padded Bras**: Lightweight soft-molded comfort cups (e.g., *Passion*, *Syska*, *Clavis*, *Dazzle*, *Carens*).
+- **Net / Bridal Bras**: Lycra net and lace designs (e.g., *Vintage*, *Gemini*, *Trendy*, *Virtus*, *Gipsy*).
+- **Sports Bras**: Support crop sports bras (e.g., *Zareen*, *Tissot*, *Fiero*, *Activ*, *Daisy*, *Saloni*, *Image*).
+- **Feeding Bras**: Nursing drop-cup hosiery bras (e.g., *Shalini*, *Havells*).
+
+### 2. Panties
+- **Basic Panties**: Standard comfort cuts (e.g., *Safire*, *Della*).
+- **Period Panties**: Leak-proof support and care panties (e.g., *ComfortX*).
+- **Boy Shorts**: Full coverage boyshort briefs (e.g., *Brio*, *Hify*, *Sonal*).
+- **Supporter Panties**: Specialized pelvic and tummy support briefs (e.g., *Max*, *Vanilla*, *Anny*).
+- **Elastic Styles**: Inner elastic and small elastic designs (e.g., *Cool*, *Feelings*, *Nidhi*, *Elina*, *Seema*, *Soha*).
+- **Modal Fabric Panties**: Extra soft modal fabric underwear (e.g., *Modal Print*, *Modal Softy*).
+
+### 3. Lingerie Sets
+- **Padded Sets**: Premium padded bra and matching panty sets (e.g., *Jolly*, *Avni*, *Zoya*).
+- **Plain & Printed Sets**: Comfortable matching everyday and patterned sets (e.g., *Crazy*, *Myra*, *Mahek*).
+- **Net / Bridal Sets**: Elegant bridal net sets (e.g., *Gypsy*, *Trendy*).
+
+### 4. Slips / Camisoles
+- **Top Slips**: Cozy everyday camisoles (e.g., *Gouri*, *Kashish*, *Neva*, *Dolphin*).
+- **Full Slips**: Long full-dress slips (e.g., *Heena*).
+- **Gown Slips**: Under-gown slips (e.g., *Sonam*).

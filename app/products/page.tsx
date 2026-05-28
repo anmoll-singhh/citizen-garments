@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { ProductsGrid } from "@/components/products-grid";
 import { Footer } from "@/components/footer";
+import { products } from "@/lib/products-data";
 
 export const metadata: Metadata = {
   title: "Shop All Lingerie – Bras, Panties, Sets & Slips",
@@ -53,6 +54,48 @@ const productCollectionSchema = {
   },
 };
 
+// Generate JSON-LD Product schemas dynamically for search engine crawling
+const productSchemas = products.map((product) => {
+  const categoryLabel = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+  const subcategoryLabel = product.subcategory.charAt(0).toUpperCase() + product.subcategory.slice(1);
+  
+  let desc = `Premium ${subcategoryLabel} ${categoryLabel} from Citizen Lingerie. Crafted from high-quality ${product.fabric} for maximum comfort, style, and durability.`;
+  if (product.sizeRange) {
+    desc += ` Available size range: ${product.sizeRange.split(" (")[0]}.`;
+  }
+  if (product.cupSize) {
+    desc += ` Cup size: ${product.cupSize}.`;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `https://citizenslingerie.com/products?product=${product.id}`,
+    "name": `Citizen Lingerie ${product.name} ${subcategoryLabel}`,
+    "image": `https://citizenslingerie.com${product.image}`,
+    "description": desc,
+    "sku": product.id,
+    "mpn": product.id,
+    "brand": {
+      "@type": "Brand",
+      "name": "Citizen Lingerie"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://citizenslingerie.com/products?product=${product.id}`,
+      "priceCurrency": "INR",
+      "price": "399.00",
+      "priceValidUntil": "2027-12-31",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "ClothingStore",
+        "name": "Citizen Lingerie"
+      }
+    }
+  };
+});
+
 export default function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
@@ -60,6 +103,13 @@ export default function ProductsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productCollectionSchema) }}
       />
+      {productSchemas.map((schema) => (
+        <script
+          key={`product-schema-${schema.sku}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <Header />
       <div className="pt-28 pb-20">
         <div className="container mx-auto px-4 md:px-8">
